@@ -3,8 +3,10 @@ import {
   useImperativeHandle,
   ForwardRefRenderFunction,
   forwardRef,
+  useEffect,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import useUserStore from "../../../store/useUserStore";
 export interface SettingProps {}
 export interface SettingRef {
   open: () => void;
@@ -16,6 +18,14 @@ const InnerSetting: ForwardRefRenderFunction<SettingRef, SettingProps> = (
 ) => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const { setUserInfo } = useUserStore();
+
+  useEffect(() => {
+    const name = localStorage.getItem("name");
+    if (!name) {
+      navigate("/login");
+    }
+  }, []);
 
   const open = () => {
     setShow(true);
@@ -43,6 +53,9 @@ const InnerSetting: ForwardRefRenderFunction<SettingRef, SettingProps> = (
           className=" pt-[5px]"
           onClick={() => {
             close();
+            setUserInfo?.({});
+            localStorage.removeItem("name");
+            navigate("/login");
           }}
         >
           logout

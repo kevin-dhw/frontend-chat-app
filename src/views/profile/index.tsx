@@ -1,11 +1,10 @@
 import React from "react";
 import Logo from "../../assets/react.svg";
-import { useLocation } from "react-router-dom";
 import { Button } from "antd";
+import useRedictHook from "../../hooks/useRedictHook";
 
 const Profile: React.FC = () => {
-  const { state } = useLocation();
-  console.log(state, "state");
+  useRedictHook();
 
   return (
     <div className=" flex h-screen w-screen">

@@ -6,16 +6,29 @@ interface UserItem {
   state: "offLine" | "onLine";
   selected: boolean;
 }
-
+interface UserInfo {
+  bio: string;
+  createdAt: string;
+  email: string;
+  fullName: string;
+  password: string;
+  profilePic: string;
+  updatedAt: string;
+  __v: number;
+  _id: string;
+}
 export interface State {
   user: UserItem[];
+  userInfo?: undefined | Partial<UserInfo>;
 }
 
 export interface Action {
   changeUser: (idx: number) => void;
+  setUserInfo?: (info: Record<any, string>) => void;
 }
 
 const useUserStore = create<State & Action>((set) => ({
+  userInfo: {},
   user: [
     {
       img: "123",
@@ -88,6 +101,11 @@ const useUserStore = create<State & Action>((set) => ({
         }
       });
       return { user: state.user };
+    });
+  },
+  setUserInfo: (info: Record<any, string>) => {
+    set(() => {
+      return { userInfo: info };
     });
   },
 }));

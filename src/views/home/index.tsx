@@ -3,10 +3,13 @@ import Logo from "../../assets/react.svg";
 import useUserStore from "../../store/useUserStore";
 import classNames from "classnames";
 import Setting, { SettingRef } from "./components/setting";
+import useRedictHook from "../../hooks/useRedictHook";
 
 const Home: React.FC = () => {
   const { user, changeUser } = useUserStore();
   const settingRef = useRef<SettingRef>(null);
+  useRedictHook();
+
   return (
     <div className=" flex w-full h-screen">
       <div className=" w-[70%] h-[80%] m-auto border rounded-lg flex p-[20px]">
