@@ -13,6 +13,18 @@ export const isEmpty = (val: any) => {
   return false;
 };
 
+// check if one propery of this object is empty
+
+export const isProperyEmpry = (obj: Record<string, any>) => {
+  let flag = true;
+  for (let k in obj) {
+    if (!obj[k]) {
+      flag = false;
+    }
+  }
+  return flag;
+};
+
 export const formatTime = (time: string) => {
   return dayjs(time).format("YYYY:MM:DD");
 };
