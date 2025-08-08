@@ -21,7 +21,7 @@ const Test: React.FC = () => {
   const getListData = () => {
     axios.post("/api/test/list").then((res) => {
       console.log(res, "listres");
-      setList(res.data.data);
+      setList(res.data.data.list);
     });
   };
 
@@ -37,12 +37,14 @@ const Test: React.FC = () => {
         onClick={async () => {
           const flag = isProperyEmpry(data);
           if (flag) {
-            const res = await axios.post("/api/test/create", data);
+            const param = { ...data };
+
+            const res = await axios.post("/api/test/create", param);
             if (res.data.success) {
             }
           }
           await getListData();
-          setData({ name: "", age: "" });
+          setData({ name: "", age: "", img: logo });
         }}
       >
         添加
@@ -75,6 +77,7 @@ const Test: React.FC = () => {
                 <span className=" mr-[20px]">
                   名字： {item.name} ， 年龄： {item.age}
                 </span>
+
                 <Button
                   onClick={() => {
                     setState({ num: idx, state: "edit" });
@@ -118,6 +121,22 @@ const Test: React.FC = () => {
             );
           })}
         </div>
+        <br />
+        <Button
+          onClick={() => {
+            console.log(12344);
+          }}
+        >
+          添加详情数据
+        </Button>
+        <input
+          type="file"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            console.log(e.target.files?.[0], "filest");
+            const render = new FileReader();
+            // render.readAsArrayBuffer(logo);
+          }}
+        ></input>
       </div>
     </div>
   );
