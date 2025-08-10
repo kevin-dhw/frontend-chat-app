@@ -44,7 +44,7 @@ const Test: React.FC = () => {
             }
           }
           await getListData();
-          setData({ name: "", age: "", img: logo });
+          setData({ name: "", age: "", img: "" });
         }}
       >
         添加
@@ -133,7 +133,7 @@ const Test: React.FC = () => {
           type="file"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             console.log(e.target.files?.[0], "filest");
-            const render = new FileReader();
+            // const render = new FileReader();
             // render.readAsArrayBuffer(logo);
           }}
         ></input>
