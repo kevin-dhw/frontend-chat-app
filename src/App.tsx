@@ -3,6 +3,7 @@ import Test from "./views/test";
 import Home from "./views/home";
 import Profile from "./views/profile";
 import Login from "./views/login";
+import Cart from "./views/cart";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,0 +1,14 @@
+@keyframes fromRightToLeft {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(100%);
+        opacity: 1;
+    }
+}
+
+.from-right-to-left {
+    animation: fromRightToLeft 0.3s ease forwards;
+}
