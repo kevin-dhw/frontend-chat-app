@@ -1,16 +1,14 @@
-/* 定义动画 */
-@keyframes slideInFromRight {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
+@keyframes fromRightToLeft {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
   }
-  
-  /* 应用动画 */
-  .animate-slide-in {
-    animation: slideInFromRight 0.3s ease forwards;
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
+}
+
+.from-right-to-left {
+  animation: fromRightToLeft ease 0.5s forwards;
+}
