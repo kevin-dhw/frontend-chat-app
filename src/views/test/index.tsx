@@ -17,6 +17,10 @@ const Test: React.FC = () => {
   });
   const [curItem, setCurItem] = useState<Record<string, any>>({});
   const [list, setList] = useState<any[]>([]);
+  const [detailData, setDetailData] = useState({
+    job: "",
+    school: "",
+  });
 
   const getListData = () => {
     axios.post("/api/test/list").then((res) => {
@@ -123,20 +127,59 @@ const Test: React.FC = () => {
         </div>
         <br />
         <Button
-          onClick={() => {
-            console.log(12344);
+          onClick={async () => {
+            const param = { ...detailData, _id: curItem._id };
+            const res = await axios.post("/api/testDetail/create", param);
+            console.log(res, "testDetail");
           }}
         >
-          添加详情数据
+          确认添加详情
         </Button>
+        <div>
+          <Input
+            value={detailData.school}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setDetailData((pre) => {
+                return { ...pre, school: e.target.value };
+              });
+            }}
+            style={{ width: 200 }}
+          ></Input>
+          <Input
+            value={detailData.job}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setDetailData((pre) => {
+                return { ...pre, job: e.target.value };
+              });
+            }}
+            style={{ width: 200 }}
+          ></Input>
+          <br />
+        </div>
+        <br />
         <input
           type="file"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            console.log(e.target.files?.[0], "filest");
-            // const render = new FileReader();
-            // render.readAsArrayBuffer(logo);
+            const file = e.target.files?.[0]!;
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = async () => {
+              const base64Img = reader.result;
+              const param = {
+                img: base64Img,
+                id: curItem._id,
+              };
+              const res = await axios.post("/api/test/updateImg", param);
+              if (res.data.success) {
+                console.log(res, "res");
+              }
+            };
           }}
         ></input>
+        <div>
+          <div>2233</div>
+          <img src={curItem.img}></img>
+        </div>
       </div>
     </div>
   );
